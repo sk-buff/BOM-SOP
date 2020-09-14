@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>SOP test</title>
+    </head>
+    <body>
+        {% if origin == "diff" %}
+            <button>Start SOP test</button>
+        {% elif origin != None and origin != "" %}
+            <h3>Click the following link to open a page from a different origin for SOP test</h3>
+            <a href="http://{{ origin }}/soptest?origin=diff" target="blank">http://{{ origin }}/soptest?origin=diff</a>
+        {% else %}
+            <form action="soptest" method="GET">
+                Input the origin for sop test (which is different from the current one)</br>
+                <input type="text" name="origin">
+            </form>
+        {% endif %}
+    </body>
+</html>
