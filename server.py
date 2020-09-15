@@ -2,6 +2,7 @@
 
 from flask import Flask, request, render_template
 from hyper import HTTP20Connection
+import argparse
 
 app = Flask(__name__)
 
@@ -37,4 +38,13 @@ def return_soptest_page():
     return render_template('soptest.html', origin = diffOrigin)
 
 if __name__ == "__main__":
-    app.run(host="10.0.2.15", port=5000)
+    # argument parsing
+    parser = argparse.ArgumentParser()
+    parser.add_argument("ip", help="input the ip address that the web server runs on")
+    parser.add_argument("port", help="input the port that the web server runs on")
+    args = parser.parse_args()
+
+    try:
+        app.run(host=args.ip, port=args.port)
+    except:
+        print("can not run web server. please check the ip address and the port")
