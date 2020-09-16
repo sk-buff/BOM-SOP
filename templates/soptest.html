@@ -9,7 +9,7 @@
             <script type="text/javascript">
                 function soptest(){
                     var b = document.getElementsByName("button");
-                    b.remove();
+                    b.parentNode.removeChild(b);
 
                     var tb = getResTable();
                     document.body.appendChild(tb);
