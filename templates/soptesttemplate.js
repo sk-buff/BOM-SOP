@@ -36,22 +36,20 @@ function getResTable() {
 
             let assignValue;
             if (attrs[i].type == "number") {
-                assignValue = 0;
+                assignValue = "0";
             }
             else if (attrs[i].type == "string") {
-                assignValue = "abc";
+                assignValue = "'abc'";
             }
             else if (attrs[i].type == "boolean") {
-                assignValue = true;
+                assignValue = "true";
             }
             else if (attrs[i].type == "function") {
-                assignValue = function () {
-                    return;
-                }
+                assignValue = "function () { return; }"
             }
 
             try {
-                eval(attrs[i].ref) = assignValue;
+                eval(attrs[i].ref + "=" + assignValue);
             }
             catch (error) {
                 cowTextArray[3] = "n";
