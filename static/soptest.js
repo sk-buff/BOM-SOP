@@ -18,7 +18,7 @@ function getResTable() {
         let row = document.createElement('tr');
         
         let cowTextArray = [attrs[i].ref, attrs[i].type];
-        if (["number", "string", "boolean"].includes(attrs[i].type)) {
+        if (["number", "string", "boolean", "function"].includes(attrs[i].type)) {
             cowTextArray[2] = "y";
             try {
                 let a = eval(attrs[i].ref);
@@ -27,14 +27,39 @@ function getResTable() {
                 cowTextArray[2] = "n";
             }
         }
-        else if (["function", "object"].includes(attrs[i].type)) {
-            cowTextArray[2] = "n.a.";
-        }
-        else if (attrs[i].type == "function") {
+        else if (["undefined", "object"].includes(attrs[i].type)) {
             cowTextArray[2] = "n.a.";
         }
 
-        cowTextArray[3] = "blank";
+        if (["number", "string", "boolean", "function"].includes(attrs[i].type)) {
+            cowTextArray[3] = "y";
+
+            let assignValue;
+            if (attrs[i].type == "number") {
+                assignValue = 0;
+            }
+            else if (attrs[i].type == "string") {
+                assignValue = "abc";
+            }
+            else if (attrs[i].type == "boolean") {
+                assignValue = true;
+            }
+            else if (attrs[i].type == "function") {
+                assignValue = function () {
+                    return;
+                }
+            }
+
+            try {
+                eval(attrs[i].ref) = assignValue;
+            }
+            catch (error) {
+                cowTextArray[3] = "n";
+            }
+        }
+        else if (["undefined", "object"].includes(attrs[i].type)) {
+            cowTextArray[3] = "n.a.";
+        }
 
         for (let j = 0; j < 4; j++) {
             let cow = document.createElement('td');
