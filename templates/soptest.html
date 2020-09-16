@@ -4,7 +4,7 @@
     </head>
     <body>
         {% if origin == "diff" %}
-            <script src="{{ url_for('staic', filename='soptest.js') }}"></script>
+            <script src="{{ url_for('static', filename='soptest.js') }}"></script>
             <button onclick="soptest()" name="button">Start SOP test</button>
             <script type="text/javascript">
                 function soptest(){
