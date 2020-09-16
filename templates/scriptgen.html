@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>script gen</title>
+    </head>
+    <body>
+        {% if sub == 1 %}
+            <button onclick="scriptGen()">gen script</button>
+            <script>
+                function scriptGen() {
+                    list = [];
+                    getAttributes(window.opener, "window.opener", list);
+
+                    var jsonText = JSON.stringify(list);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/testscriptgen", true);
+                    xhr.send(jsonText);
+                }
+
+                function getAttributes(obj, refStr, resList) {
+                    // console.log(refStr);
+
+                    if (typeof obj == "object" && obj != null) {
+                        let attrs = Object.keys(obj);
+                        let len = attrs.length;
+
+                        if (len == 0) {
+                            let attr = {
+                                type: "object",
+                                ref: refStr
+                            }
+                            resList[resList.length] = attr;
+                        }
+                        else {
+                            for (let i = 0; i < len; i++) {
+                                //["self", "frames", "parent", "window"]
+                                if (obj == eval(refStr + '.' + attrs[i]))
+                                    continue;
+                                else    
+                                    getAttributes(eval(refStr + '.' + attrs[i]), refStr + '.' + attrs[i], resList);
+                            }
+                        }
+                    }
+                    else {
+                        let attr = {
+                            type: typeof obj,
+                            ref: refStr
+                        };
+                        resList[resList.length] = attr;
+                    }
+                }
+            </script>
+        {% else %}
+            <h3>Click the following hyperlink to open a sub page</h3>
+            <a href="http://{{hostname}}/testscriptgen?sub=1" target="blank">http://{{hostname}}/testscriptgen?sub=1</a>
+        {% endif %}
+    </body>
+</html>
