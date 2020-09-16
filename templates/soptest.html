@@ -4,7 +4,7 @@
     </head>
     <body>
         {% if origin == "diff" %}
-            <script src="{{ urlfor('staic', filename='soptest.js') }}"></script>
+            <script src="{{ url_for('staic', filename='soptest.js') }}"></script>
             <button onclick="soptest()" name="button">Start SOP test</button>
             <script type="text/javascript">
                 function soptest(){
@@ -22,6 +22,7 @@
             <form action="soptest" method="GET">
                 Input the origin for sop test (which is different from the current one)</br>
                 <input type="text" name="origin">
+                <input type="submit" value="submit">
             </form>
         {% endif %}
     </body>
