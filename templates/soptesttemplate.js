@@ -43,7 +43,7 @@ function getResTable() {
             row.appendChild(cow);
         }
 
-        teble.appendChild(row);
+        table.appendChild(row);
     }
 
     return table;
