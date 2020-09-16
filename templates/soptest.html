@@ -4,7 +4,17 @@
     </head>
     <body>
         {% if origin == "diff" %}
-            <button>Start SOP test</button>
+            <script src="{{ urlfor('staic', filename='soptest.js') }}"></script>
+            <button onclick="soptest()" name="button">Start SOP test</button>
+            <script type="text/javascript">
+                function soptest(){
+                    var b = document.getElementsByName("button");
+                    b.remove();
+
+                    var tb = getResTable();
+                    document.body.appendChild(tb);
+                }
+            </script>
         {% elif origin != None and origin != "" %}
             <h3>Click the following link to open a page from a different origin for SOP test</h3>
             <a href="http://{{ origin }}/soptest?origin=diff" target="blank">http://{{ origin }}/soptest?origin=diff</a>

@@ -2,7 +2,9 @@
 
 from flask import Flask, request, render_template
 from hyper import HTTP20Connection
+from jinja2 import Environment, PackageLoader
 import argparse
+import json
 
 app = Flask(__name__)
 
@@ -33,9 +35,39 @@ def return_static_page():
 def return_soptest_page():
     diffOrigin = request.args.get("origin")
 
-    print(diffOrigin)
-
     return render_template('soptest.html', origin = diffOrigin)
+
+@app.route("/testscriptgen", methods=["GET", "POST"])
+def return_testscriptgen_page():
+    if request.method == "GET":
+        hostname = request.headers["Host"]
+        sub = request.args.get("sub")
+
+        if sub == None:
+            sub = "0"
+
+        sub = int(sub)
+
+        if sub == 1:
+            return render_template('scriptgen.html', sub = sub)
+        else:
+            return render_template('scriptgen.html', hostname = hostname)
+    elif request.method == "POST":
+        jsonData = request.get_data()
+
+        genscript("soptest.js", jsonData)
+
+        return "script gen success", 200
+
+def genscript(fileName, jsonData):
+    jinjaEnv = Environment(
+        loader=PackageLoader("server"),
+    )
+    content = jinjaEnv.get_template("soptesttemplate.js").render(jsonData=str(jsonData, encoding="utf-8"))
+    
+    jsFile = open("./static/%s" % fileName, "w")
+    jsFile.write(content)
+    jsFile.close()
 
 if __name__ == "__main__":
     # argument parsing
