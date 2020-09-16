@@ -5,11 +5,11 @@
     <body>
         {% if origin == "diff" %}
             <script src="{{ url_for('static', filename='soptest.js') }}"></script>
-            <button onclick="soptest()" name="button">Start SOP test</button>
+            <button onclick="soptest()" id="button">Start SOP test</button>
             <script type="text/javascript">
                 function soptest(){
-                    var b = document.getElementsByName("button");
-                    b.parentNode.removeChild(b);
+                    var b = document.getElementById("button");
+                    b.remove();
 
                     var tb = getResTable();
                     document.body.appendChild(tb);
