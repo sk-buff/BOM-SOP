@@ -38,7 +38,7 @@ function getResTable() {
 
         for (let j = 0; j < 4; j++) {
             let cow = document.createElement('td');
-            let text = document.createTextNode(cowTextArray[i]);
+            let text = document.createTextNode(cowTextArray[j]);
             cow.appendChild(text);
             row.appendChild(cow);
         }
