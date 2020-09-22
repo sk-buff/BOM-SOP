@@ -32,10 +32,9 @@
                         }
                         else {
                             for (let i = 0; i < len; i++) {
-                                //["self", "frames", "parent", "window"]
-                                if (obj == eval(refStr + '.' + attrs[i]))
+                                if (obj === eval(refStr + '.' + attrs[i]))
                                     continue;
-                                else    
+                                else   
                                     getAttributes(eval(refStr + '.' + attrs[i]), refStr + '.' + attrs[i], resList);
                             }
                         }
