@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Client Test</title>
+    </head>
+    <body>
+        <p>Your client is {{userAgent}}</p>
+        <script>
+            document.write("<p>" + window.location + "</p>");
+
+            if (window.opener == null)
+                document.write("<p>window.opener == null</p>");
+            else
+                document.write("<p>window.opener != null</p>");
+        </script>
+    </body>
+</html>

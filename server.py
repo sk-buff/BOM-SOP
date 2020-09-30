@@ -59,6 +59,13 @@ def return_testscriptgen_page():
 
         return "script gen success", 200
 
+@app.route("/clienttest")
+def return_clienttest_page():
+    userAgent = request.headers["User-Agent"]
+    app.logger.info(userAgent)
+
+    return render_template('clienttest.html', userAgent = userAgent)
+
 def genscript(fileName, jsonData):
     jinjaEnv = Environment(
         loader=PackageLoader("server"),
@@ -69,6 +76,8 @@ def genscript(fileName, jsonData):
     jsFile.write(content)
     jsFile.close()
 
+
+
 if __name__ == "__main__":
     # argument parsing
     parser = argparse.ArgumentParser()
@@ -77,6 +86,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
+        app.debug = True
         app.run(host=args.ip, port=args.port)
     except:
         print("can not run web server. please check the ip address and the port")
