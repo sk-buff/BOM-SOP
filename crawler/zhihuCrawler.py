@@ -363,12 +363,12 @@ class zhihuDataAnalyzer:
         return answerNum, urlNum, httpNum, httpsNum
 
 if __name__ == "__main__":
-    crawler = zhihuCrawler(debug=True)
+    # crawler = zhihuCrawler(debug=True)
     # cookieString = '_zap=49515c31-8d17-46ad-83ef-72fe146e5b8b; d_c0="AKDR3iB_CBKPTsNv9KRQFiOO7OY1vsVADg8=|1602587842"; Hm_lvt_98beee57fd2ef70ccdd5ca52b9740c49=1602748146,1602748228,1603270215,1603271401; capsion_ticket="2|1:0|10:1603271401|14:capsion_ticket|44:MDkyMzE4MjY2NWMwNDAxZDgzNzllNDAzNGYxMWQwNGM=|cb3aa401359ee784d23698871191908369288d724c94533852b088640f62c360"; tst=r; tshl=; q_c1=843142f3dc544de6be6e16ce35a451b3|1602673668000|1602673668000; _xsrf=AobudXCq8sVrSnVA7X37o9lxpkJjDTPE; KLBRSID=ca494ee5d16b14b649673c122ff27291|1603271436|1603271400; Hm_lpvt_98beee57fd2ef70ccdd5ca52b9740c49=1603271426; SESSIONID=cXp1RFFLx6genAiFNtQIGeEoWgRm6OSRPxzdB1M3ag9; JOID=WlAdCkLjbfSHDInfL-LMp9sp99Y9gDWFtl_PmWKaW5PjYsm2aQqWetkNid4uae9hC4bjGmmjh5E0fcZ1W4A8M1o=; osd=UFkdCk7pZPSHAIPWL-LArdIp99o3iTWFulXGmWKWUZrjYsW8YAqWdtMEid4iY-ZhC4rpE2mji5s9fcZ5UYk8M1Y=; z_c0="2|1:0|10:1603271424|4:z_c0|92:Mi4xcHV1X0F3QUFBQUFBb05IZUlIOElFaVlBQUFCZ0FsVk5BRWw5WUFEQXA5b3N3QjJYeTlrQTJtSGNsbnlkbS1HdVR3|f3956da6c18ae820b7829b2a4ac6fd1c8edc123ea6fdb4357ccc017706b2ab47"; unlock_ticket="AADCdIW76womAAAAYAJVTQgCkF87VnwdO2vaeIzzwu9ykizSkl1s2Q=="'
     # crawler.addCookie(cookieString)
     # crawler.getQuestions(pullDownTimes=100)
-    crawler.getAnswersOfQuestionsInFile("./data/zhihu/questions", rawHTML=True, urlParsing=True)
+    # crawler.getAnswersOfQuestionsInFile("./data/zhihu/questions", rawHTML=True, urlParsing=True)
     # crawler.getAnswersOfOneQuestion(412123743, rawHTML=True, urlParsing=True)
-    # analyzer = zhihuDataAnalyzer(dataDir="./data/zhihu")
-    # analyzer.analyzeQuestionsInFile("crawledQuestions", debug=True)
+    analyzer = zhihuDataAnalyzer(dataDir="./data/zhihu")
+    analyzer.analyzeQuestionsInFile("crawledQuestions", debug=True)
 
